@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import DigitalMenu from "./DigitalMenu";
 
-const App = () => {
+function App() {
   return (
-    <div>Welcome to QuickMenu App!</div>
-  )
+    <div>
+      <DigitalMenu />
+    </div>
+  );
 }
 
-export default App
+export default App;
