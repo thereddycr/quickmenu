@@ -18,7 +18,7 @@ import {
 const menuData = {
   brand: {
     name: "Sunset Rolls",
-    subtitle: "taste the sunset!",
+    // subtitle: "Deliciously Yours",
     logo: "/assets/images/CrispyChicken.jpg",
   },
   menuItems: [
@@ -78,10 +78,12 @@ const DigitalMenu = () => {
 
   const [activeFilter, setActiveFilter] = useState("all");
 
+  // Handle Tab Change
   const handleFilterChange = (event, newValue) => {
     setActiveFilter(newValue);
   };
 
+  // Filtered Menu Items
   const filteredItems =
     activeFilter === "all"
       ? menuItems
@@ -90,7 +92,7 @@ const DigitalMenu = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#fff8e1",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -98,86 +100,42 @@ const DigitalMenu = () => {
       }}
     >
       {/* AppBar */}
-      <AppBar
-        position="sticky"
-        sx={{
-          backgroundColor: "#2b2d42",
-          boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-        }}
-      >
+      <AppBar position="sticky" sx={{ backgroundColor: "#ff7043" }}>
         <Toolbar>
           <Box
             component="img"
             src={brand.logo}
             alt="Brand Logo"
             sx={{
-              width: 40,
-              height: 40,
+              width: 35,
+              height: 35,
               borderRadius: "50%",
               marginRight: 2,
-              border: "2px solid #ffb703",
+              border: "2px solid #fff",
             }}
           />
-          <Box>
-            <Typography
-              variant="h5"
-              sx={{
-                fontWeight: "bold",
-                color: "#edf2f4",
-                lineHeight: 1.2,
-              }}
-            >
-              {brand.name}
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                color: "#ffb703",
-                fontSize: "0.6rem",
-                fontStyle: "italic",
-                fontWeight: "400",
-              }}
-            >
-              {brand.subtitle}
-            </Typography>
-          </Box>
+          <Typography variant="h5" sx={{ fontWeight: "bold", flexGrow: 1 }}>
+            {brand.name}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{ fontStyle: "italic", color: "#fff8e1" }}
+          >
+            {brand.subtitle}
+          </Typography>
         </Toolbar>
       </AppBar>
 
       {/* Filters */}
-      <Box
-        sx={{
-          background: "linear-gradient(90deg, #2b2d42 0%, #8d99ae 100%)",
-          paddingY: 2,
-        }}
-      >
+      <Box sx={{ backgroundColor: "#ffcc80", paddingY: 1 }}>
         <Container>
           <Tabs
             value={activeFilter}
             onChange={handleFilterChange}
             variant="scrollable"
             scrollButtons="auto"
-            textColor="inherit"
-            indicatorColor="secondary"
-            sx={{
-              "& .MuiTab-root": {
-                color: "#edf2f4",
-                fontWeight: "600",
-                fontSize: "16px",
-                marginX: "8px",
-                borderRadius: "4px",
-                "&:hover": {
-                  backgroundColor: "#ffb703",
-                  color: "#2b2d42",
-                  transition: "background-color 0.3s ease, color 0.3s ease",
-                },
-              },
-              "& .MuiTabs-indicator": {
-                backgroundColor: "#ffb703",
-                height: "4px",
-                borderRadius: "4px",
-              },
-            }}
+            textColor="primary"
+            indicatorColor="primary"
           >
             <Tab label="All" value="all" />
             {menuItems.map((section, index) => (
@@ -205,7 +163,7 @@ const DigitalMenu = () => {
                 padding: 2,
                 boxShadow: 5,
                 borderRadius: 3,
-                backgroundColor: "#ffffff",
+                backgroundColor: "#fff3e0",
                 maxWidth: isMobile ? "100%" : 700,
                 margin: "auto",
               }}
@@ -219,7 +177,7 @@ const DigitalMenu = () => {
                   objectFit: "cover",
                   borderRadius: 3,
                   marginBottom: isMobile ? 2 : 0,
-                  border: "2px solid #8d99ae",
+                  border: "2px solid #ffe0b2",
                 }}
                 image={section.image}
                 alt={section.category}
@@ -239,7 +197,7 @@ const DigitalMenu = () => {
                   variant="h5"
                   gutterBottom
                   sx={{
-                    color: "#2b2d42",
+                    color: "#e65100",
                     fontWeight: "bold",
                   }}
                 >
@@ -259,7 +217,7 @@ const DigitalMenu = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        color: "#4a4e69",
+                        color: "#333333",
                         flex: 1,
                         marginRight: "10px",
                       }}
@@ -269,7 +227,7 @@ const DigitalMenu = () => {
                     <Typography
                       variant="body1"
                       sx={{
-                        color: "#ef233c",
+                        color: "#43a047",
                         fontWeight: "bold",
                       }}
                     >
@@ -286,19 +244,19 @@ const DigitalMenu = () => {
       {/* Footer */}
       <Box
         sx={{
-          backgroundColor: "#2b2d42",
-          color: "#edf2f4",
+          backgroundColor: "#333",
+          color: "#fff",
           textAlign: "center",
           paddingY: 2,
         }}
       >
         <Typography
           variant="body2"
-          sx={{ fontWeight: "bold", color: "#ffb703" }}
+          sx={{ fontWeight: "bold", color: "#f0a500" }}
         >
           Powered by QuickMenu
         </Typography>
-        <Typography variant="body2" sx={{ color: "#8d99ae" }}>
+        <Typography variant="body2" sx={{ color: "#ccc" }}>
           © {new Date().getFullYear()} All Rights Reserved
         </Typography>
       </Box>
