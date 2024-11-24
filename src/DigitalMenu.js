@@ -111,8 +111,8 @@ const DigitalMenu = () => {
             src={brand.logo}
             alt="Brand Logo"
             sx={{
-              width: 40,
-              height: 40,
+              width: isMobile ? 30 : 40,
+              height: isMobile ? 30 : 40,
               borderRadius: "50%",
               marginRight: 2,
               border: "2px solid #ffb703",
@@ -120,7 +120,7 @@ const DigitalMenu = () => {
           />
           <Box>
             <Typography
-              variant="h5"
+              variant={isMobile ? "h6" : "h5"}
               sx={{
                 fontWeight: "bold",
                 color: "#edf2f4",
@@ -133,7 +133,7 @@ const DigitalMenu = () => {
               variant="subtitle2"
               sx={{
                 color: "#ffb703",
-                fontSize: "0.6rem",
+                fontSize: isMobile ? "0.5rem" : "0.8rem",
                 fontStyle: "italic",
                 fontWeight: "400",
               }}
@@ -148,7 +148,7 @@ const DigitalMenu = () => {
       <Box
         sx={{
           background: "linear-gradient(90deg, #2b2d42 0%, #8d99ae 100%)",
-          paddingY: 2,
+          paddingY: isMobile ? 1 : 2,
         }}
       >
         <Container>
@@ -162,8 +162,8 @@ const DigitalMenu = () => {
             sx={{
               "& .MuiTab-root": {
                 color: "#edf2f4",
-                fontWeight: "600",
-                fontSize: "16px",
+                fontWeight: isMobile ? "500" : "600",
+                fontSize: isMobile ? "14px" : "16px",
                 marginX: "8px",
                 borderRadius: "4px",
                 "&:hover": {
@@ -192,8 +192,8 @@ const DigitalMenu = () => {
       </Box>
 
       {/* Main Content */}
-      <Container sx={{ paddingY: 4, flexGrow: 1 }}>
-        <Stack spacing={4}>
+      <Container sx={{ paddingY: isMobile ? 3 : 4, flexGrow: 1 }}>
+        <Stack spacing={isMobile ? 3 : 4}>
           {filteredItems.map((section, index) => (
             <Card
               key={index}
@@ -202,7 +202,7 @@ const DigitalMenu = () => {
                 flexDirection: isMobile ? "column" : "row",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: 2,
+                padding: isMobile ? 1.5 : 2,
                 boxShadow: 5,
                 borderRadius: 3,
                 backgroundColor: "#ffffff",
@@ -215,7 +215,7 @@ const DigitalMenu = () => {
                 component="img"
                 sx={{
                   width: isMobile ? "100%" : 250,
-                  height: isMobile ? 200 : 180,
+                  height: isMobile ? 170 : 180,
                   objectFit: "cover",
                   borderRadius: 3,
                   marginBottom: isMobile ? 2 : 0,
@@ -236,7 +236,7 @@ const DigitalMenu = () => {
                 }}
               >
                 <Typography
-                  variant="h5"
+                  variant={isMobile ? "h6" : "h5"}
                   gutterBottom
                   sx={{
                     color: "#2b2d42",
@@ -254,6 +254,7 @@ const DigitalMenu = () => {
                       alignItems: "center",
                       width: "100%",
                       marginBottom: "8px",
+                      fontSize: isMobile ? "0.9rem" : "1rem",
                     }}
                   >
                     <Typography
@@ -290,6 +291,7 @@ const DigitalMenu = () => {
           color: "#edf2f4",
           textAlign: "center",
           paddingY: 2,
+          position: "relative",
         }}
       >
         <Typography
@@ -300,6 +302,19 @@ const DigitalMenu = () => {
         </Typography>
         <Typography variant="body2" sx={{ color: "#8d99ae" }}>
           © {new Date().getFullYear()} All Rights Reserved
+        </Typography>
+        {/* Subtle Version Number */}
+        <Typography
+          variant="caption"
+          sx={{
+            fontSize: isMobile ? "0.5rem" : "0.8rem",
+            color: "#8d99ae",
+            position: "absolute",
+            bottom: "4px",
+            right: "8px",
+          }}
+        >
+          Version 0.1.1
         </Typography>
       </Box>
     </Box>
