@@ -1,7 +1,16 @@
 {
   "name": "quickmenu",
   "version": "0.1.2",
+  "description": "Quick Menu Web",
   "private": true,
+  "engines": {
+    "node": "22.11.0",
+    "npm": "10.9.0"
+  },
+  "pre-commit": [
+    "precommit-msg",
+    "lint"
+  ],
   "dependencies": {
     "@emotion/react": "11.13.5",
     "@emotion/styled": "11.13.5",
@@ -52,7 +61,7 @@
     "@types/react": "^18.3.12",
     "@typescript-eslint/eslint-plugin": "^8.16.0",
     "@typescript-eslint/parser": "^8.16.0",
-    "eslint": "^9.16.0",
+    "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.31.0",
@@ -62,5 +71,10 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "prettier": "^3.4.1",
     "typescript": "5.7.2"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
   }
 }
