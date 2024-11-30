@@ -21,6 +21,7 @@ interface DigitalMenuProps {
   menuData: MenuData;
 }
 
+// -------------------------------------------------------------------
 const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -36,7 +37,7 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          minHeight: '100vh',
+          height: '100dvh',
           flexDirection: 'column',
         }}
       >
@@ -68,7 +69,7 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
     <Box
       sx={{
         backgroundColor: '#f5f5f5',
-        minHeight: '100vh',
+        height: '100dvh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',

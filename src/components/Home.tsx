@@ -9,6 +9,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SplashLogo } from '../assets/images/splash.svg';
 
+// -------------------------------------------------------------------
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -18,7 +19,7 @@ const Home: React.FC = () => {
     <Box
       sx={{
         backgroundColor: '#f5f5f5',
-        height: '100vh',
+        height: '100dvh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -74,7 +75,7 @@ const Home: React.FC = () => {
           color: '#2b2d42',
           fontSize: isMobile ? '0.8rem' : '1.5rem',
           textAlign: 'center',
-          fontFamily: 'CustomFont, sans-serif',
+          fontFamily: 'MaisonArtisan',
         }}
       >
         Welcome to QuickMenu

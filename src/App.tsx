@@ -7,9 +7,11 @@ import {
 } from 'react-router-dom';
 
 import menuData from './assets/MenuData.json';
+
 import DigitalMenu from './components/DigitalMenu';
 import Home from './components/Home'
 
+// -------------------------------------------------------------------
 const App: React.FC = () => {
   return (
     <Router>

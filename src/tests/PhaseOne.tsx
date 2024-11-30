@@ -118,7 +118,7 @@ const DigitalMenu: React.FC = () => {
     <Box
       sx={{
         backgroundColor: '#fff8e1',
-        minHeight: '100vh',
+        height: '100dvh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
