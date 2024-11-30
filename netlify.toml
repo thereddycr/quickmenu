@@ -1,2 +1,9 @@
 [build]
   node_version = "22.11.0"
+  command = "npm run build" # Adjust this if you're using yarn or a different build command
+  publish = "build"         # Directory where your build output is located
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
