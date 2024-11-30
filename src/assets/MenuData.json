@@ -53,5 +53,62 @@
         "image": "/assets/images/CrispyChicken.jpg"
       }
     ]
+  },
+  "golden-delights": {
+    "brand": {
+      "name": "Golden Delights",
+      "subtitle": "Experience the golden touch!",
+      "logo": "/assets/images/CrispyChicken.jpg"
+    },
+    "menuItems": [
+      {
+        "category": "Tacos",
+        "items": [
+          { "name": "Classic Beef Taco", "price": 120 },
+          { "name": "Spicy Chicken Taco", "price": 130 },
+          { "name": "Veggie Taco", "price": 110 },
+          { "name": "Cheesy Taco", "price": 140 }
+        ],
+        "image": "/assets/images/Shawarma.jpg"
+      },
+      {
+        "category": "Burgers",
+        "items": [
+          { "name": "Classic Chicken Burger", "price": 150 },
+          { "name": "Beef Burger Deluxe", "price": 180 },
+          { "name": "Veggie Supreme Burger", "price": 140 },
+          { "name": "Cheesy Chicken Burger", "price": 160 }
+        ],
+        "image": "/assets/images/Wrap.jpg"
+      },
+      {
+        "category": "Pasta",
+        "items": [
+          { "name": "Creamy Alfredo Pasta", "price": 200 },
+          { "name": "Spicy Arrabbiata Pasta", "price": 190 },
+          { "name": "Veggie Pesto Pasta", "price": 180 },
+          { "name": "Chicken Carbonara Pasta", "price": 210 }
+        ],
+        "image": "/assets/images/Frankie.jpg"
+      },
+      {
+        "category": "Dimsums",
+        "items": [
+          { "name": "Steamed Chicken Dimsums (6 pieces)", "price": 90 },
+          { "name": "Fried Chicken Dimsums (6 pieces)", "price": 100 },
+          { "name": "Veg Steamed Dimsums (6 pieces)", "price": 80 },
+          { "name": "Veg Fried Dimsums (6 pieces)", "price": 90 }
+        ],
+        "image": "/assets/images/Momos.jpg"
+      },
+      {
+        "category": "Crispy Snacks",
+        "items": [
+          { "name": "Crispy Cheese Bites (6 pieces)", "price": 160 },
+          { "name": "Crispy Chicken Nuggets (6 pieces)", "price": 170 }
+        ],
+        "image": "/assets/images/CrispyChicken.jpg"
+      }
+    ]
   }
 }

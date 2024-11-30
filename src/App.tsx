@@ -9,7 +9,7 @@ import {
 import menuData from './assets/MenuData.json';
 
 import DigitalMenu from './components/DigitalMenu';
-import Home from './components/Home'
+import Home from './components/Home';
 
 // -------------------------------------------------------------------
 const App: React.FC = () => {

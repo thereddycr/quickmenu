@@ -63,7 +63,9 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
   const filteredItems: MenuCategory[] =
     activeFilter === 'all'
       ? menuItems
-      : menuItems.filter((section) => section.category === activeFilter);
+      : menuItems.filter(
+          (section: MenuCategory) => section.category === activeFilter
+        );
 
   return (
     <Box
@@ -158,7 +160,7 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
             }}
           >
             <Tab label="All" value="all" />
-            {menuItems.map((section, index) => (
+            {menuItems.map((section: MenuCategory, index: number) => (
               <Tab
                 key={index}
                 label={section.category}
