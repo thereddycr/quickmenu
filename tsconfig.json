@@ -1,28 +1,33 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "baseUrl": ".",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "strict": true,
+    "noEmit": true,
+    "allowJs": true,
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "paths": {
       "@context/*": ["./src/context/*"],
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./src/assets/*"],
-      "@modules/*": ["./src/modules/*"]
-    },
-    "baseUrl": "./",
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "node",
-    "typeRoots": ["node_modules/@types"],
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+      "@modules/*": ["./src/modules/*"],
+      "@layouts/*": ["./src/layouts/*"]
+    }
   },
-  "include": ["src"]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx", "src/**/*"]
 }

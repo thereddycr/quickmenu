@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Box,
   Card,
@@ -16,6 +14,8 @@ import {
   Tab,
 } from '@mui/material';
 import { MenuData, MenuCategory } from '../types/DigitalMenuTypes';
+import Header from '../layouts/header';
+import Footer from '../layouts/footer';
 
 interface DigitalMenuProps {
   menuData: MenuData;
@@ -45,7 +45,7 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
           Menu Not Found
         </Typography>
         <Typography variant="body1" sx={{ color: '#8d99ae' }}>
-          The menu for "{clientName}" is not available.
+          The menu for {clientName} is not available.
         </Typography>
       </Box>
     );
@@ -53,19 +53,14 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
 
   const { brand, menuItems } = clientData;
 
-  const handleFilterChange = (
-    event: React.SyntheticEvent,
-    newValue: string
-  ) => {
+  const handleFilterChange = (event: React.SyntheticEvent, newValue: string) => {
     setActiveFilter(newValue);
   };
 
   const filteredItems: MenuCategory[] =
     activeFilter === 'all'
       ? menuItems
-      : menuItems.filter(
-          (section: MenuCategory) => section.category === activeFilter
-        );
+      : menuItems.filter((section: MenuCategory) => section.category === activeFilter);
 
   return (
     <Box
@@ -77,52 +72,8 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
         justifyContent: 'space-between',
       }}
     >
-      {/* AppBar */}
-      <AppBar
-        position="sticky"
-        sx={{
-          backgroundColor: '#2b2d42',
-          boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-        }}
-      >
-        <Toolbar>
-          <Box
-            component="img"
-            src={brand.logo}
-            alt="Brand Logo"
-            sx={{
-              width: isMobile ? 30 : 40,
-              height: isMobile ? 30 : 40,
-              borderRadius: '50%',
-              marginRight: 2,
-              border: '2px solid #ffb703',
-            }}
-          />
-          <Box>
-            <Typography
-              variant={isMobile ? 'h6' : 'h5'}
-              sx={{
-                fontWeight: 'bold',
-                color: '#edf2f4',
-                lineHeight: 1.2,
-              }}
-            >
-              {brand.name}
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                color: '#ffb703',
-                fontSize: isMobile ? '0.5rem' : '0.8rem',
-                fontStyle: 'italic',
-                fontWeight: '400',
-              }}
-            >
-              {brand?.subtitle}
-            </Typography>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      {/* Header */}
+      <Header brand={brand} />
 
       {/* Filters */}
       <Box
@@ -161,11 +112,7 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
           >
             <Tab label="All" value="all" />
             {menuItems.map((section: MenuCategory, index: number) => (
-              <Tab
-                key={index}
-                label={section.category}
-                value={section.category}
-              />
+              <Tab key={index} label={section.category} value={section.category} />
             ))}
           </Tabs>
         </Container>
@@ -265,38 +212,7 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
       </Container>
 
       {/* Footer */}
-      <Box
-        sx={{
-          backgroundColor: '#2b2d42',
-          color: '#edf2f4',
-          textAlign: 'center',
-          paddingY: 2,
-          position: 'relative',
-        }}
-      >
-        <Typography
-          variant="body2"
-          sx={{ fontWeight: 'bold', color: '#ffb703' }}
-        >
-          Powered by QuickMenu
-        </Typography>
-        <Typography variant="body2" sx={{ color: '#8d99ae' }}>
-          © {new Date().getFullYear()} All Rights Reserved
-        </Typography>
-        {/* Subtle Version Number */}
-        <Typography
-          variant="caption"
-          sx={{
-            fontSize: isMobile ? '0.5rem' : '0.8rem',
-            color: '#8d99ae',
-            position: 'absolute',
-            bottom: '4px',
-            right: '8px',
-          }}
-        >
-          Version 0.1.2
-        </Typography>
-      </Box>
+      <Footer />
     </Box>
   );
 };
