@@ -8,24 +8,24 @@ const Footer: React.FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#2b2d42',
-        color: '#edf2f4',
+        backgroundColor: theme.palette.custom.darkBlue,
+        color: theme.palette.custom.lightGray,
         textAlign: 'center',
         paddingY: 2,
         position: 'relative',
       }}
     >
-      <Typography variant="body2" sx={{ fontWeight: 'bold', color: '#ffb703' }}>
+      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'secondary.main' }}>
         Powered by QuickMenu
       </Typography>
-      <Typography variant="body2" sx={{ color: '#8d99ae' }}>
+      <Typography variant="body2" sx={{ color: theme.palette.custom.mediumGray }}>
         © {new Date().getFullYear()} All Rights Reserved
       </Typography>
       <Typography
         variant="caption"
         sx={{
           fontSize: isMobile ? '0.5rem' : '0.8rem',
-          color: '#8d99ae',
+          color: theme.palette.custom.mediumGray,
           position: 'absolute',
           bottom: '4px',
           right: '8px',

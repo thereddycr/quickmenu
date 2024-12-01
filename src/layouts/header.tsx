@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, useMediaQuery, useTheme } from '@mui/material';
 import { Brand } from 'src/types/DigitalMenuTypes';
 
 interface HeaderProps {
@@ -21,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ brand }) => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: '#2b2d42',
+        backgroundColor: theme.palette.custom.darkBlue,
         boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
       }}
     >
@@ -35,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ brand }) => {
             height: isMobile ? 30 : 40,
             borderRadius: '50%',
             marginRight: 2,
-            border: '2px solid #ffb703',
+            border: (theme) => `2px solid ${theme.palette.secondary.main}`,
           }}
         />
         <Box>
@@ -43,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ brand }) => {
             variant={isMobile ? 'h6' : 'h5'}
             sx={{
               fontWeight: 'bold',
-              color: '#edf2f4',
+              color: theme.palette.custom.lightGray,
               lineHeight: 1.2,
             }}
           >
@@ -52,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({ brand }) => {
           <Typography
             variant="subtitle2"
             sx={{
-              color: '#ffb703',
+              color: 'secondary.main',
               fontSize: isMobile ? '0.5rem' : '0.8rem',
               fontStyle: 'italic',
               fontWeight: '400',

@@ -2,6 +2,8 @@
 export type MenuItem = {
   name: string;
   price: number;
+  image?: string;
+  description?: string;
 };
 
 // Types for a menu category

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Button,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
+import { Box, Typography, Button, useMediaQuery, useTheme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as SplashLogo } from '../assets/images/splash.svg';
 
@@ -18,7 +12,7 @@ const Home: React.FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: '#f5f5f5',
+        backgroundColor: 'background.default',
         height: '100dvh',
         display: 'flex',
         flexDirection: 'column',
@@ -41,7 +35,7 @@ const Home: React.FC = () => {
       <Typography
         variant="body1"
         sx={{
-          color: '#8d99ae',
+          color: 'custom.mediumGray',
           textAlign: 'center',
           fontSize: isMobile ? '0.9rem' : '1.2rem',
           lineHeight: 1.5,
@@ -54,7 +48,7 @@ const Home: React.FC = () => {
 
       <Button
         variant="contained"
-        color="secondary"
+        color="primary"
         size={isMobile ? 'small' : 'medium'}
         onClick={() => navigate('/sunset-rolls')}
         sx={{
@@ -72,7 +66,7 @@ const Home: React.FC = () => {
           bottom: isMobile ? 16 : 32,
           left: '50%',
           transform: 'translateX(-50%)',
-          color: '#2b2d42',
+          color: 'primary.main',
           fontSize: isMobile ? '0.8rem' : '1.5rem',
           textAlign: 'center',
           fontFamily: 'MaisonArtisan',

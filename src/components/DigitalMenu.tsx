@@ -1,34 +1,42 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Typography,
   Box,
   Card,
-  CardContent,
-  CardMedia,
-  Stack,
-  useMediaQuery,
-  useTheme,
+  Avatar,
   Container,
-  Tabs,
-  Tab,
+  CardMedia,
+  TextField,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Drawer,
+  IconButton,
+  Button,
+  useTheme,
 } from '@mui/material';
-import { MenuData, MenuCategory } from '../types/DigitalMenuTypes';
+import CloseIcon from '@mui/icons-material/Close';
+import { MenuData, MenuItem } from '../types/DigitalMenuTypes';
 import Header from '../layouts/header';
 import Footer from '../layouts/footer';
+
+import OfferImage from '../assets/images/11669587_20943817.svg';
 
 interface DigitalMenuProps {
   menuData: MenuData;
 }
 
-// -------------------------------------------------------------------
 const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
   const { clientName } = useParams<{ clientName: string }>();
   const clientData = clientName ? menuData[clientName] : undefined;
 
-  const [activeFilter, setActiveFilter] = useState<string>('all');
+  // State for the selected item and drawer visibility
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   if (!clientData) {
     return (
@@ -37,14 +45,14 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          height: '100dvh',
+          height: '100vh',
           flexDirection: 'column',
         }}
       >
-        <Typography variant="h4" sx={{ color: '#ff4d4f' }}>
+        <Typography variant="h4" sx={{ color: theme.palette.custom.danger }}>
           Menu Not Found
         </Typography>
-        <Typography variant="body1" sx={{ color: '#8d99ae' }}>
+        <Typography variant="body1" sx={{ color: theme.palette.custom.mediumGray }}>
           The menu for {clientName} is not available.
         </Typography>
       </Box>
@@ -53,163 +61,269 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
 
   const { brand, menuItems } = clientData;
 
-  const handleFilterChange = (event: React.SyntheticEvent, newValue: string) => {
-    setActiveFilter(newValue);
+  const handleCategoryClick = (category: string) => {
+    navigate(`/${clientName}/${category}`);
   };
 
-  const filteredItems: MenuCategory[] =
-    activeFilter === 'all'
-      ? menuItems
-      : menuItems.filter((section: MenuCategory) => section.category === activeFilter);
+  const handleItemClick = (item: MenuItem) => {
+    setSelectedItem(item);
+    setDrawerOpen(true);
+  };
+
+  const handleCloseDrawer = () => {
+    setDrawerOpen(false);
+    setSelectedItem(null);
+  };
+
+  // Merge all items into a single array
+  const allItems = menuItems.flatMap((section) => section.items);
 
   return (
     <Box
       sx={{
-        backgroundColor: '#f5f5f5',
-        height: '100dvh',
+        backgroundColor: 'background.default',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
       }}
     >
       {/* Header */}
       <Header brand={brand} />
 
-      {/* Filters */}
-      <Box
-        sx={{
-          background: 'linear-gradient(90deg, #2b2d42 0%, #8d99ae 100%)',
-          // paddingY: isMobile ? 1 : 2,
-        }}
-      >
-        <Container>
-          <Tabs
-            value={activeFilter}
-            onChange={handleFilterChange}
-            variant="scrollable"
-            scrollButtons="auto"
-            textColor="inherit"
-            indicatorColor="secondary"
+      <Box sx={{ flex: 1, overflow: 'auto' }}>
+        {/* Search Bar */}
+        <Container sx={{ mt: 1 }}>
+          <TextField
+            variant="outlined"
+            fullWidth
+            placeholder="Search for food..."
+            size="small"
+            sx={{ backgroundColor: 'background.paper', borderRadius: 2, boxShadow: 2 }}
+          />
+        </Container>
+
+        {/* Offers Section */}
+        <Container sx={{ marginY: 1 }}>
+          <Card
             sx={{
-              '& .MuiTab-root': {
-                color: '#edf2f4',
-                fontWeight: isMobile ? '500' : '600',
-                fontSize: isMobile ? '10px' : '16px',
-                marginX: '4px',
-                borderRadius: '4px',
-                // '&:hover': {
-                //   backgroundColor: '#ffb703',
-                //   color: '#2b2d42',
-                //   transition: 'background-color 0.3s ease, color 0.3s ease',
-                // },
-              },
-              '& .MuiTabs-indicator': {
-                backgroundColor: '#ffb703',
-                height: '4px',
-                borderRadius: '4px',
-              },
+              borderRadius: 2,
+              overflow: 'hidden',
+              boxShadow: 2,
             }}
           >
-            <Tab label="All" value="all" />
-            {menuItems.map((section: MenuCategory, index: number) => (
-              <Tab key={index} label={section.category} value={section.category} />
-            ))}
-          </Tabs>
+            <CardMedia component="img" image={OfferImage} alt="Offer Image" />
+          </Card>
         </Container>
-      </Box>
 
-      {/* Main Content */}
-      <Container sx={{ paddingY: isMobile ? 3 : 4, flexGrow: 1 }}>
-        <Stack spacing={isMobile ? 3 : 4}>
-          {filteredItems.map((section, index) => (
-            <Card
-              key={index}
+        {/* Categories */}
+        <Container>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              mt: 2,
+              mb: 1,
+            }}
+          >
+            <Box
               sx={{
-                display: 'flex',
-                flexDirection: isMobile ? 'column' : 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: isMobile ? 1.5 : 2,
-                boxShadow: 5,
-                borderRadius: 3,
-                backgroundColor: '#ffffff',
-                maxWidth: isMobile ? '100%' : 700,
-                margin: 'auto',
+                flex: 1,
+                height: '1px',
+                backgroundColor: theme.palette.custom.lineColor,
+              }}
+            />
+            <Typography
+              variant="h6"
+              sx={{
+                px: 2,
+                fontWeight: 'bold',
+                color: '#555',
+                textTransform: 'uppercase',
+                whiteSpace: 'nowrap',
+                fontSize: 12,
               }}
             >
-              {/* Image Section */}
-              <CardMedia
-                component="img"
-                sx={{
-                  width: isMobile ? '100%' : 250,
-                  height: isMobile ? 170 : 180,
-                  objectFit: 'cover',
-                  borderRadius: 3,
-                  marginBottom: isMobile ? 2 : 0,
-                  border: '2px solid #8d99ae',
-                }}
-                image={section.image}
-                alt={section.category}
-              />
-              {/* Content Section */}
-              <CardContent
+              {"WHAT'S ON YOUR MIND?"}
+            </Typography>
+            <Box
+              sx={{
+                flex: 1,
+                height: '1px',
+                backgroundColor: theme.palette.custom.lineColor,
+              }}
+            />
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              overflowX: 'auto',
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none',
+              '&::-webkit-scrollbar': {
+                display: 'none',
+              },
+              mt: 2,
+            }}
+          >
+            {menuItems.map((section) => (
+              <Box
+                key={section.category}
                 sx={{
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center',
-                  alignItems: 'flex-start',
-                  textAlign: 'left',
-                  paddingX: isMobile ? 0 : 2,
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  minWidth: 80,
+                  cursor: 'pointer',
                 }}
+                onClick={() => handleCategoryClick(section.category)}
               >
-                <Typography
-                  variant={isMobile ? 'h6' : 'h5'}
-                  gutterBottom
-                  sx={{
-                    color: '#2b2d42',
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {section.category}
-                </Typography>
-                {section.items.map((item, idx) => (
-                  <Box
-                    key={idx}
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      width: '100%',
-                      marginBottom: '8px',
-                      fontSize: isMobile ? '0.9rem' : '1rem',
-                    }}
-                  >
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: '#4a4e69',
-                        flex: 1,
-                        marginRight: '10px',
-                      }}
-                    >
-                      {item.name}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{
-                        color: '#ef233c',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      ₹{item.price}
-                    </Typography>
-                  </Box>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
-        </Stack>
-      </Container>
+                <Avatar
+                  src={section.image}
+                  alt={section.category}
+                  sx={{ width: 56, height: 56, marginBottom: 1 }}
+                />
+                <Typography variant="caption">{section.category}</Typography>
+              </Box>
+            ))}
+          </Box>
+        </Container>
+
+        {/* All Items Section */}
+        <Container sx={{ mt: 2 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              mt: 2,
+              mb: 1,
+            }}
+          >
+            <Box
+              sx={{
+                flex: 1,
+                height: '1px',
+                backgroundColor: theme.palette.custom.lineColor,
+              }}
+            />
+            <Typography
+              variant="h6"
+              sx={{
+                px: 2,
+                fontWeight: 'bold',
+                color: '#555',
+                textTransform: 'uppercase',
+                whiteSpace: 'nowrap',
+                fontSize: 12,
+              }}
+            >
+              All Items
+            </Typography>
+            <Box
+              sx={{
+                flex: 1,
+                height: '1px',
+                backgroundColor: theme.palette.custom.lineColor,
+              }}
+            />
+          </Box>
+          <List
+            sx={{
+              overflowY: 'auto',
+              '&::-webkit-scrollbar': { display: 'none' },
+            }}
+          >
+            {allItems.map((item, index) => (
+              <ListItem
+                key={index}
+                sx={{
+                  backgroundColor: 'background.paper',
+                  borderRadius: 2,
+                  mb: 1,
+                  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleItemClick(item)}
+              >
+                <ListItemAvatar>
+                  <Avatar src={item.image} alt={item.name} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={item.name}
+                  secondary={`₹${item.price}`}
+                  primaryTypographyProps={{ fontWeight: 'bold' }}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Container>
+      </Box>
+
+      {/* Drawer for Item Details */}
+      <Drawer
+        anchor="bottom"
+        open={drawerOpen}
+        onClose={handleCloseDrawer}
+        sx={{
+          '& .MuiDrawer-paper': {
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
+            p: 2,
+          },
+        }}
+      >
+        {selectedItem && (
+          <Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mb: 2,
+              }}
+            >
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                {selectedItem.name}
+              </Typography>
+              <IconButton onClick={handleCloseDrawer}>
+                <CloseIcon />
+              </IconButton>
+            </Box>
+            <CardMedia
+              component="img"
+              image={selectedItem.image}
+              alt={selectedItem.name}
+              sx={{
+                height: 200,
+                borderRadius: '4px 4px 0 0',
+              }}
+            />
+            <Typography variant="body1" sx={{ mb: 1 }}>
+              {selectedItem.description || 'No description available.'}
+            </Typography>
+            <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 2, color: '#1976d2' }}>
+              ₹{selectedItem.price}
+            </Typography>
+            <Button
+              variant="contained"
+              fullWidth
+              onClick={handleCloseDrawer}
+              sx={{
+                backgroundColor: 'primary.main',
+                color: 'background.paper',
+                ':hover': { backgroundColor: 'primary.dark' },
+              }}
+            >
+              Add to Cart
+            </Button>
+          </Box>
+        )}
+      </Drawer>
 
       {/* Footer */}
       <Footer />
