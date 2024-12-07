@@ -148,6 +148,10 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
     return logoColors[index % logoColors.length];
   };
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
     <Box
       sx={{
@@ -158,7 +162,7 @@ const DigitalMenu: React.FC<DigitalMenuProps> = ({ menuData }) => {
       }}
     >
       {/* Header */}
-      <Header />
+      <Header onClick={handleBack} />
 
       <Box
         sx={{
