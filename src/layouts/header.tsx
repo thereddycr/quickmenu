@@ -1,12 +1,20 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, useMediaQuery, useTheme } from '@mui/material';
-import { Brand } from 'src/types/DigitalMenuTypes';
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  useMediaQuery,
+  useTheme,
+  Container,
+  IconButton,
+} from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 interface HeaderProps {
-  brand: Brand;
+  onClick?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ brand }) => {
+const Header: React.FC<HeaderProps> = ({ onClick }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -14,46 +22,89 @@ const Header: React.FC<HeaderProps> = ({ brand }) => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundColor: theme.palette.custom.darkBlue,
-        boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+        backgroundColor: 'background.default',
+        height: isMobile ? 50 : 64,
+        boxShadow: 'none',
       }}
     >
-      <Toolbar>
-        <Box
-          component="img"
-          src={brand.logo}
-          alt="Brand Logo"
+      <Toolbar
+        disableGutters
+        sx={{
+          minHeight: 'unset',
+          height: 1,
+          padding: 0,
+        }}
+      >
+        <Container
           sx={{
-            width: isMobile ? 30 : 40,
-            height: isMobile ? 30 : 40,
-            borderRadius: '50%',
-            marginRight: 2,
-            border: (theme) => `2px solid ${theme.palette.secondary.main}`,
+            height: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
-        />
-        <Box>
-          <Typography
-            variant={isMobile ? 'h6' : 'h5'}
+        >
+          {/* Go Back */}
+          <IconButton
+            onClick={onClick}
             sx={{
-              fontWeight: 'bold',
-              color: theme.palette.custom.lightGray,
-              lineHeight: 1.2,
+              bgcolor: theme.palette.custom.lightGray,
+              borderRadius: '50%',
+              width: 30,
+              height: 30,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              '&:hover': {
+                bgcolor: 'rgba(128, 128, 128, 0.3)',
+              },
             }}
           >
-            {brand.name}
-          </Typography>
-          <Typography
-            variant="subtitle2"
+            <ChevronLeftIcon sx={{ color: 'grey.700', fontSize: 24 }} />
+          </IconButton>
+
+          {/* QuickMenu LOGO */}
+          <Box>
+            <div className="logo"></div>
+          </Box>
+
+          {/* Favorite */}
+          <Box
             sx={{
-              color: 'secondary.main',
-              fontSize: isMobile ? '0.5rem' : '0.8rem',
-              fontStyle: 'italic',
-              fontWeight: '400',
+              bgcolor: theme.palette.custom.lightGray,
+              borderRadius: '50%',
+              width: 30,
+              height: 30,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            {brand.subtitle}
-          </Typography>
-        </Box>
+            <div title="Like" className="heart-container">
+              <input id="Give-It-An-Id" className="checkbox" type="checkbox" />
+              <div className="svg-container">
+                <svg xmlns="http://www.w3.org/2000/svg" className="svg-outline" viewBox="0 0 24 24">
+                  <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" className="svg-filled" viewBox="0 0 24 24">
+                  <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="100"
+                  width="100"
+                  className="svg-celebrate"
+                >
+                  <polygon points="10,10 20,20"></polygon>
+                  <polygon points="10,50 20,50"></polygon>
+                  <polygon points="20,80 30,70"></polygon>
+                  <polygon points="90,10 80,20"></polygon>
+                  <polygon points="90,50 80,50"></polygon>
+                  <polygon points="80,80 70,70"></polygon>
+                </svg>
+              </div>
+            </div>
+          </Box>
+        </Container>
       </Toolbar>
     </AppBar>
   );

@@ -1,0 +1,35 @@
+.logo {
+  position: absolute;
+  top: calc(50% - 0.8em);
+  left: calc(50% - 0.8em);
+  width: 1.6em;
+  height: 1.6em;
+  transform: rotate(0deg);
+}
+
+.logo:before,
+.logo:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 0.15em;
+  transform: translate(-50%, -50%);
+}
+
+.logo:before {
+  width: 1.6em;
+  height: 0.32em;
+  box-shadow:
+    0 -0.32em rgba(225, 20, 98, 0.75),
+    0 0.32em rgba(111, 202, 220, 0.75);
+}
+
+.logo:after {
+  width: 0.32em;
+  height: 1.6em;
+  box-shadow:
+    0.32em 0 rgba(61, 184, 143, 0.75),
+    -0.32em 0 rgba(233, 169, 32, 0.75);
+}

@@ -8,17 +8,21 @@ const Footer: React.FC = () => {
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.custom.darkBlue,
+        backgroundColor: 'background.default',
         color: theme.palette.custom.lightGray,
         textAlign: 'center',
         paddingY: 2,
         position: 'relative',
+        borderTop: `0.1px solid ${theme.palette.custom.lineColor}`,
       }}
     >
-      <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'secondary.main' }}>
+      <Typography
+        variant="h1"
+        sx={{ color: 'secondary.main', fontSize: '0.7rem', lineHeight: 1.5 }}
+      >
         Powered by QuickMenu
       </Typography>
-      <Typography variant="body2" sx={{ color: theme.palette.custom.mediumGray }}>
+      <Typography variant="h1" sx={{ color: theme.palette.custom.mediumGray, fontSize: '0.5rem' }}>
         © {new Date().getFullYear()} All Rights Reserved
       </Typography>
       <Typography
@@ -31,7 +35,7 @@ const Footer: React.FC = () => {
           right: '8px',
         }}
       >
-        Version 0.1.2
+        version 0.1.3
       </Typography>
     </Box>
   );
